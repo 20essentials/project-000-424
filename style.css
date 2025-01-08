@@ -1,0 +1,111 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue';
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+:root {
+  --primary-color: #fff;
+  --secondary-color: #87f4b5;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 1700px;
+  height: 1700px;
+  position: relative;
+
+  @media (width <= 1111px) {
+    zoom: 0.45;
+  }
+
+  .item {
+    position: absolute;
+    inset: calc(var(--d) * 10px);
+    animation: girar 2s linear infinite alternate both;
+    animation-delay: calc(var(--d) * 0.1s);
+    z-index: -1;
+
+    &:nth-child(even)::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--secondary-color);
+      transform: translateY(-50%);
+    }
+
+    &:nth-child(even)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      background: var(--secondary-color);
+      transform: translateX(-50%);
+    }
+    &:nth-child(odd)::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: var(--primary-color);
+      transform: translateY(-50%);
+    }
+
+    &:nth-child(odd)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: 100%;
+      background: var(--primary-color);
+      transform: translateX(-50%);
+    }
+
+    &:nth-child(even) {
+      background: var(--primary-color);
+    }
+
+    &:nth-child(odd) {
+      background: var(--secondary-color);
+    }
+  }
+}
+
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
